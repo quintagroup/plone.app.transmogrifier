@@ -7,6 +7,7 @@ from collective.transmogrifier.utils import defaultKeys
 
 from Products.Archetypes.interfaces import IReferenceable
 from Products.Archetypes.config import UUID_ATTR
+from plone.uuid.interfaces import ATTRIBUTE_NAME
 
 class UIDUpdaterSection(object):
     classProvides(ISectionBlueprint)
@@ -15,7 +16,6 @@ class UIDUpdaterSection(object):
     def __init__(self, transmogrifier, name, options, previous):
         self.previous = previous
         self.context = transmogrifier.context
-        
         if 'path-key' in options:
             pathkeys = options['path-key'].splitlines()
         else:
@@ -45,13 +45,13 @@ class UIDUpdaterSection(object):
             obj = self.context.unrestrictedTraverse(str(path).lstrip('/'), None)
             if obj is None: # path doesn't exist
                 yield item; continue
-            
-            if IReferenceable.providedBy(obj):
+            if 1==1: #IReferenceable.providedBy(obj):
                 oldUID = obj.UID()
                 if oldUID != uid:                    
                     if not oldUID:
                         setattr(obj, UUID_ATTR, uid)
                     else:
-                        obj._setUID(uid)
+                        #obj._setUID(uid)
+                        setattr(obj, ATTRIBUTE_NAME, uid)
                 
             yield item
