@@ -39,12 +39,12 @@ class BrowserDefaultSection(object):
                 yield item; continue
 
             if layoutkey:
-                layout = item[layoutkey]
+                layout = str(item[layoutkey])
                 if layout:
                     obj.setLayout(layout)
 
             if defaultpagekey:
-                defaultpage = item[defaultpagekey]
+                defaultpage = str(item[defaultpagekey])
                 if defaultpage:
                     obj.setDefaultPage(defaultpage)
 
